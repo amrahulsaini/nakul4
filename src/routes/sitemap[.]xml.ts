@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { POSTS } from "./blog";
 import { PLATFORMS } from "@/lib/site";
+import { TOPICS } from "@/lib/keywords";
 
 const BASE_URL = "";
 
@@ -15,10 +16,12 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/", changefreq: "weekly", priority: "1.0" },
           { path: "/games", changefreq: "weekly", priority: "0.9" },
           { path: "/blog", changefreq: "weekly", priority: "0.9" },
+          { path: "/topics", changefreq: "weekly", priority: "0.9" },
           { path: "/about", changefreq: "monthly", priority: "0.7" },
           { path: "/faq", changefreq: "monthly", priority: "0.7" },
           { path: "/contact", changefreq: "monthly", priority: "0.6" },
           ...PLATFORMS.map((p) => ({ path: `/platforms/${p.slug}`, changefreq: "monthly", priority: "0.8" })),
+          ...TOPICS.map((t) => ({ path: `/topics/${t.slug}`, changefreq: "monthly", priority: "0.8" })),
           ...POSTS.map((p) => ({ path: `/blog/${p.slug}`, changefreq: "monthly", priority: "0.8" })),
         ];
         const urls = entries.map((e) =>

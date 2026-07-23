@@ -10,6 +10,7 @@ import realSlotsHall from "@/assets/real-slots-hall.jpg";
 import realBlackjack from "@/assets/real-blackjack.jpg";
 import logoAsset from "@/assets/madras-book-logo.webp.asset.json";
 import { WHATSAPP_URL, WHATSAPP_NUMBER, SITE_NAME, PLATFORMS } from "@/lib/site";
+import { TOPICS } from "@/lib/keywords";
 
 function PosterCard({ img, label, title, alt }: { img: string; label: string; title: string; alt: string }) {
   return (
@@ -309,14 +310,90 @@ function Home() {
         </div>
       </section>
 
-      {/* CTA */}
+
+      {/* Topic hub / keyword pages */}
       <section className="container-page mt-24">
+        <div className="max-w-2xl">
+          <p className="text-primary text-sm font-semibold uppercase tracking-wider">Explore by topic</p>
+          <h2 className="mt-2 text-3xl md:text-4xl">Deep-dive guides on every cricket ID keyword.</h2>
+          <p className="mt-4 text-muted-foreground">Detailed pages on activation, markets, limits and payouts — written for Indian players and updated for the current season.</p>
+        </div>
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {TOPICS.slice(0, 9).map((t) => (
+            <Link key={t.slug} to="/topics/$slug" params={{ slug: t.slug }} className="card-surface p-5 hover:border-primary/60 transition-colors">
+              <p className="text-[11px] uppercase tracking-widest text-primary font-semibold">{t.keyword}</p>
+              <h3 className="mt-2 text-base font-semibold">{t.h1}</h3>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-6">
+          <Link to="/topics" className="btn-ghost">See all topics →</Link>
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <section className="container-page mt-24">
+        <div className="max-w-2xl">
+          <p className="text-primary text-sm font-semibold uppercase tracking-wider">Player reviews</p>
+          <h2 className="mt-2 text-3xl md:text-4xl">Rated 4.9/5 by {SITE_NAME} players.</h2>
+          <p className="mt-4 text-muted-foreground">Independent feedback from cricket, exchange and casino players across India.</p>
+        </div>
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {[
+            { n: "Rohit S.", c: "Chennai", r: "Got my Sky Exchange ID two minutes before toss. Withdrawal hit UPI in 12 min after the game. Solid team." },
+            { n: "Aakash M.", c: "Mumbai", r: "The fancy sessions on Diamond are sharp. Manager helped me lock a green book in the 14th over — first time cashing out mid-innings." },
+            { n: "Priya K.", c: "Bengaluru", r: "Started with a ₹500 Teen Patti wallet. Hindi dealer, instant payout, no hidden charges. Now my regular Sunday game." },
+            { n: "Vikram T.", c: "Hyderabad", r: "Held three IDs during IPL — 1xBet for accumulators, FairPlay for back-lay, Lotus for casino. One WhatsApp, zero drama." },
+            { n: "Suresh R.", c: "Coimbatore", r: "Withdrawal disputes on other sites took days. Here it was resolved in one chat, refunded same day. That's trust." },
+            { n: "Ankit J.", c: "Delhi", r: "Live roulette limits are actually usable — ₹5L max on Lightning. Streams don't lag even on my 4G." },
+          ].map((v) => (
+            <article key={v.n} className="card-surface p-6">
+              <div className="text-primary text-lg">★★★★★</div>
+              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">"{v.r}"</p>
+              <p className="mt-4 text-sm font-semibold">{v.n} <span className="text-muted-foreground font-normal">· {v.c}</span></p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Homepage FAQ */}
+      <section className="container-page mt-24">
+        <div className="max-w-2xl">
+          <p className="text-primary text-sm font-semibold uppercase tracking-wider">Frequently asked</p>
+          <h2 className="mt-2 text-3xl md:text-4xl">Everything about your cricket ID.</h2>
+        </div>
+        <div className="mt-10 max-w-3xl divide-y divide-border/60 border border-border/60 rounded-2xl overflow-hidden">
+          {[
+            { q: "How fast do I actually get my cricket ID?", a: `Most ${SITE_NAME} players are set up in under two minutes on WhatsApp — from first message to first login.` },
+            { q: "Which platforms can I open an ID on?", a: "12+ verified platforms including 1xBet, FairPlay, Diamond Exchange, Sky Exchange, Lotus 365, Reddy Anna, Mahadev Book and more." },
+            { q: "What is the minimum deposit?", a: "Most cricket IDs start at ₹500. Premium exchange IDs open from ₹1,000." },
+            { q: "Do you support all payment methods?", a: "Yes — Paytm, GPay, PhonePe, UPI, IMPS, NEFT, bank transfer and crypto. Pick whatever suits you." },
+            { q: "How fast are withdrawals?", a: "Standard payouts complete within 15–30 minutes to your registered UPI or bank account." },
+            { q: "Do I get a bonus on my first deposit?", a: "Yes — every new player gets a 5% joining bonus and a 2% refill bonus on every subsequent top-up." },
+            { q: "Is support really 24×7?", a: "Yes. Real humans, not bots — replies within seconds any hour of the day." },
+          ].map((f) => (
+            <details key={f.q} className="group open:bg-secondary/40">
+              <summary className="cursor-pointer list-none p-5 flex items-start justify-between gap-4">
+                <span className="font-medium">{f.q}</span>
+                <span className="shrink-0 text-primary group-open:rotate-45 transition-transform text-xl leading-none">+</span>
+              </summary>
+              <p className="px-5 pb-5 -mt-1 text-sm text-muted-foreground leading-relaxed">{f.a}</p>
+            </details>
+          ))}
+        </div>
+        <div className="mt-6">
+          <Link to="/faq" className="btn-ghost">See full FAQ →</Link>
+        </div>
+
+
+      {/* CTA */}
+      <section className="container-page mt-24 mb-8">
         <div className="card-surface p-8 md:p-12 relative overflow-hidden">
           <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
           <div className="relative grid gap-6 md:grid-cols-[1.4fr_1fr] items-center">
             <div>
               <h2 className="text-2xl md:text-3xl">Ready to play the next match?</h2>
-              <p className="mt-3 text-muted-foreground max-w-xl">Your ID can be live before the coin toss. Message {SITE_NAME} on WhatsApp and we'll walk you through platform, deposit and first match in one flow.</p>
+              <p className="mt-3 text-muted-foreground max-w-xl">Your ID can be live before the coin toss. Message {SITE_NAME} on WhatsApp — {WHATSAPP_NUMBER.replace(/./g, "•")}.</p>
             </div>
             <div className="flex md:justify-end">
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">Start on WhatsApp</a>
@@ -327,3 +404,5 @@ function Home() {
     </>
   );
 }
+
+
