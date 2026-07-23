@@ -1,7 +1,25 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import heroImg from "@/assets/hero-cricket.jpg";
+import posterCricket from "@/assets/poster-cricket-betting.jpg";
+import posterExchange from "@/assets/poster-exchange.jpg";
+import posterIPL from "@/assets/poster-ipl-t20.jpg";
+import posterCasino from "@/assets/poster-live-casino.jpg";
 import logoAsset from "@/assets/madras-book-logo.webp.asset.json";
 import { WHATSAPP_URL, WHATSAPP_NUMBER, SITE_NAME, PLATFORMS } from "@/lib/site";
+
+function PosterCard({ img, label, title, alt }: { img: string; label: string; title: string; alt: string }) {
+  return (
+    <div className="group relative overflow-hidden rounded-3xl border border-border/60">
+      <img src={img} alt={alt} width={1600} height={912} loading="lazy" className="w-full h-56 md:h-64 object-cover transition-transform duration-500 group-hover:scale-105" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 p-5">
+        <p className="text-xs uppercase tracking-widest text-primary font-semibold">{label}</p>
+        <h3 className="mt-1 text-xl font-semibold">{title}</h3>
+      </div>
+    </div>
+  );
+}
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -146,20 +164,34 @@ function Home() {
         </div>
         <div className="mt-10 grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {PLATFORMS.map((p) => (
-            <a
+            <Link
               key={p.slug}
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              to="/platforms/$slug"
+              params={{ slug: p.slug }}
               className="card-surface p-5 text-center hover:border-primary/60 transition-colors group"
             >
               <div className="text-4xl">{p.icon}</div>
               <h3 className="mt-3 text-base font-semibold group-hover:text-primary transition-colors">{p.name}</h3>
               <p className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">{p.tag}</p>
-            </a>
+            </Link>
           ))}
         </div>
       </section>
+
+      {/* Posters strip */}
+      <section className="container-page mt-24">
+        <div className="max-w-2xl">
+          <p className="text-primary text-sm font-semibold uppercase tracking-wider">What's live now</p>
+          <h2 className="mt-2 text-3xl md:text-4xl">Cricket, exchange, IPL & live casino.</h2>
+        </div>
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
+          <PosterCard img={posterCricket} label="Cricket Betting" title="Every match, every market" alt="Cricket batsman striking ball at night stadium" />
+          <PosterCard img={posterExchange} label="Exchange Betting" title="Back & lay in real time" alt="Aerial cricket stadium with financial trading overlay" />
+          <PosterCard img={posterIPL} label="IPL & T20" title="India's biggest cricket season" alt="Cricket batsman silhouette against sunset stadium" />
+          <PosterCard img={posterCasino} label="Live Casino" title="500+ live-dealer tables" alt="Roulette wheel with playing cards and casino chips" />
+        </div>
+      </section>
+
 
       {/* Features */}
       <section id="features" className="container-page mt-24">

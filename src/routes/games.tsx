@@ -35,12 +35,17 @@ function Games() {
             <div className="flex items-center gap-3">
               <div className="text-3xl">{p.icon}</div>
               <div>
-                <h2 className="text-lg font-semibold">{p.name}</h2>
+                <h2 className="text-lg font-semibold">
+                  <Link to="/platforms/$slug" params={{ slug: p.slug }} className="hover:text-primary transition-colors">{p.name}</Link>
+                </h2>
                 <p className="text-[11px] uppercase tracking-wider text-primary">{p.tag}</p>
               </div>
             </div>
             <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{p.blurb}</p>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-5 inline-block text-sm text-primary font-medium hover:underline">Get {p.name} on WhatsApp →</a>
+            <div className="mt-5 flex items-center gap-4 text-sm">
+              <Link to="/platforms/$slug" params={{ slug: p.slug }} className="text-primary font-medium hover:underline">Details →</Link>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">WhatsApp</a>
+            </div>
           </article>
         ))}
       </div>
