@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TopicsRouteImport } from './routes/topics'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as GamesRouteImport } from './routes/games'
 import { Route as FaqRouteImport } from './routes/faq'
@@ -16,9 +17,15 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TopicsSlugRouteImport } from './routes/topics.$slug'
 import { Route as PlatformsSlugRouteImport } from './routes/platforms.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
+const TopicsRoute = TopicsRouteImport.update({
+  id: '/topics',
+  path: '/topics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -54,6 +61,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TopicsSlugRoute = TopicsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => TopicsRoute,
+} as any)
 const PlatformsSlugRoute = PlatformsSlugRouteImport.update({
   id: '/platforms/$slug',
   path: '/platforms/$slug',
@@ -73,8 +85,10 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/games': typeof GamesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/topics': typeof TopicsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
+  '/topics/$slug': typeof TopicsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -84,8 +98,10 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/games': typeof GamesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/topics': typeof TopicsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
+  '/topics/$slug': typeof TopicsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -96,8 +112,10 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/games': typeof GamesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/topics': typeof TopicsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
+  '/topics/$slug': typeof TopicsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -109,8 +127,10 @@ export interface FileRouteTypes {
     | '/faq'
     | '/games'
     | '/sitemap.xml'
+    | '/topics'
     | '/blog/$slug'
     | '/platforms/$slug'
+    | '/topics/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -120,8 +140,10 @@ export interface FileRouteTypes {
     | '/faq'
     | '/games'
     | '/sitemap.xml'
+    | '/topics'
     | '/blog/$slug'
     | '/platforms/$slug'
+    | '/topics/$slug'
   id:
     | '__root__'
     | '/'
@@ -131,8 +153,10 @@ export interface FileRouteTypes {
     | '/faq'
     | '/games'
     | '/sitemap.xml'
+    | '/topics'
     | '/blog/$slug'
     | '/platforms/$slug'
+    | '/topics/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -143,11 +167,19 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   GamesRoute: typeof GamesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TopicsRoute: typeof TopicsRouteWithChildren
   PlatformsSlugRoute: typeof PlatformsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/topics': {
+      id: '/topics'
+      path: '/topics'
+      fullPath: '/topics'
+      preLoaderRoute: typeof TopicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -197,6 +229,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/topics/$slug': {
+      id: '/topics/$slug'
+      path: '/$slug'
+      fullPath: '/topics/$slug'
+      preLoaderRoute: typeof TopicsSlugRouteImport
+      parentRoute: typeof TopicsRoute
+    }
     '/platforms/$slug': {
       id: '/platforms/$slug'
       path: '/platforms/$slug'
@@ -224,6 +263,17 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
+interface TopicsRouteChildren {
+  TopicsSlugRoute: typeof TopicsSlugRoute
+}
+
+const TopicsRouteChildren: TopicsRouteChildren = {
+  TopicsSlugRoute: TopicsSlugRoute,
+}
+
+const TopicsRouteWithChildren =
+  TopicsRoute._addFileChildren(TopicsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -232,6 +282,7 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   GamesRoute: GamesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TopicsRoute: TopicsRouteWithChildren,
   PlatformsSlugRoute: PlatformsSlugRoute,
 }
 export const routeTree = rootRouteImport

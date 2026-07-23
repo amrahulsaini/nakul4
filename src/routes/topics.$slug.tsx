@@ -63,7 +63,7 @@ export const Route = createFileRoute("/topics/$slug")({
 
 function TopicPage() {
   const { topic: t } = Route.useLoaderData();
-  const related = t.related.map((slug) => TOPIC_BY_SLUG[slug]).filter(Boolean);
+  const related = t.related.map((slug: string) => TOPIC_BY_SLUG[slug]).filter(Boolean);
   return (
     <>
       <section className="container-page pt-16 pb-8">
