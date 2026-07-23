@@ -384,5 +384,25 @@ function Home() {
         <div className="mt-6">
           <Link to="/faq" className="btn-ghost">See full FAQ →</Link>
         </div>
+
+
+      {/* CTA */}
+      <section className="container-page mt-24 mb-8">
+        <div className="card-surface p-8 md:p-12 relative overflow-hidden">
+          <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
+          <div className="relative grid gap-6 md:grid-cols-[1.4fr_1fr] items-center">
+            <div>
+              <h2 className="text-2xl md:text-3xl">Ready to play the next match?</h2>
+              <p className="mt-3 text-muted-foreground max-w-xl">Your ID can be live before the coin toss. Message {SITE_NAME} on WhatsApp — {WHATSAPP_NUMBER.replace(/./g, "•")}.</p>
+            </div>
+            <div className="flex md:justify-end">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">Start on WhatsApp</a>
+            </div>
+          </div>
+        </div>
       </section>
+    </>
+  );
+}
+
 
