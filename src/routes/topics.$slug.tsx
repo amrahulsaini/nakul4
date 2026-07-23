@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SITE_NAME, WHATSAPP_URL } from "@/lib/site";
-import { TOPIC_BY_SLUG, TOPICS } from "@/lib/keywords";
+import { TOPIC_BY_SLUG, TOPICS, type KeywordTopic } from "@/lib/keywords";
 
 export const Route = createFileRoute("/topics/$slug")({
   loader: ({ params }) => {
@@ -83,7 +83,7 @@ function TopicPage() {
 
       <section className="container-page mt-8 grid gap-8 lg:grid-cols-[1.6fr_1fr]">
         <article className="space-y-8">
-          {t.sections.map((s) => (
+          {t.sections.map((s: KeywordTopic["sections"][number]) => (
             <div key={s.h} className="card-surface p-6 md:p-8">
               <h2 className="text-2xl">{s.h}</h2>
               <p className="mt-3 text-muted-foreground leading-relaxed">{s.p}</p>
@@ -93,7 +93,7 @@ function TopicPage() {
           <div className="card-surface p-6 md:p-8">
             <h2 className="text-2xl">Frequently asked</h2>
             <div className="mt-4 divide-y divide-border/60">
-              {t.faqs.map((f) => (
+              {t.faqs.map((f: KeywordTopic["faqs"][number]) => (
                 <details key={f.q} className="group py-4">
                   <summary className="cursor-pointer list-none flex items-start justify-between gap-4">
                     <span className="font-medium">{f.q}</span>
@@ -110,7 +110,7 @@ function TopicPage() {
           <div className="card-surface p-6">
             <p className="text-xs uppercase tracking-widest text-primary font-semibold">Related topics</p>
             <ul className="mt-3 space-y-2">
-              {related.map((r) => (
+              {related.map((r: KeywordTopic) => (
                 <li key={r.slug}>
                   <Link to="/topics/$slug" params={{ slug: r.slug }} className="text-sm hover:text-primary">→ {r.h1}</Link>
                 </li>
