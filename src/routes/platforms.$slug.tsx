@@ -80,7 +80,7 @@ function PlatformDetail() {
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">Get {p.name} on WhatsApp</a>
               <Link to="/games" className="btn-ghost">Other platforms</Link>
             </div>
-            <p className="mt-3 text-xs text-muted-foreground">Direct line: {WHATSAPP_NUMBER}</p>
+            <p className="mt-3 text-xs text-muted-foreground">One tap — chat opens directly on WhatsApp.</p>
           </div>
           <div className="relative">
             <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/25 to-accent/20 blur-2xl" />
