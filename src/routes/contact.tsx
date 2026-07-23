@@ -28,8 +28,8 @@ function Contact() {
       <div className="mt-10 grid gap-6 md:grid-cols-2 max-w-4xl">
         <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="card-surface p-6 block hover:border-primary/60 transition-colors">
           <div className="text-xs uppercase tracking-wider text-muted-foreground">WhatsApp</div>
-          <div className="mt-1 text-2xl font-semibold">{WHATSAPP_NUMBER}</div>
-          <div className="mt-4 text-sm text-primary">Open chat →</div>
+          <div className="mt-1 text-2xl font-semibold">Chat with us instantly</div>
+          <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">Open WhatsApp →</div>
         </a>
         <div className="card-surface p-6">
           <div className="text-xs uppercase tracking-wider text-muted-foreground">Hours</div>
