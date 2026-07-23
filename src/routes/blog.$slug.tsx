@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { POSTS } from "./blog";
+import { POSTS, type Post } from "./blog";
 import { WHATSAPP_URL, SITE_NAME } from "@/lib/site";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -60,11 +60,11 @@ function BlogPost() {
       <h1 className="mt-3 text-3xl md:text-5xl leading-tight">{post.title}</h1>
       <p className="mt-4 text-lg text-muted-foreground">{post.excerpt}</p>
       <div className="mt-10 space-y-6 text-[15px] leading-relaxed">
-        {post.content.map((block, i) => {
+        {post.content.map((block: Post["content"][number], i: number) => {
           if (block.h) return <h2 key={i} className="text-2xl mt-10 font-semibold">{block.h}</h2>;
           if (block.list) return (
             <ul key={i} className="list-disc pl-6 space-y-2 text-muted-foreground">
-              {block.list.map((li, j) => <li key={j}>{li}</li>)}
+              {block.list.map((li: string, j: number) => <li key={j}>{li}</li>)}
             </ul>
           );
           return <p key={i} className="text-muted-foreground">{block.p}</p>;

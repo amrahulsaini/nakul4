@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { WHATSAPP_URL, SITE_NAME } from "@/lib/site";
 
-type Post = {
+export type Post = {
   slug: string;
   title: string;
   excerpt: string;
