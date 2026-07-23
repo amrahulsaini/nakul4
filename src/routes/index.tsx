@@ -4,6 +4,10 @@ import posterCricket from "@/assets/poster-cricket-betting.jpg";
 import posterExchange from "@/assets/poster-exchange.jpg";
 import posterIPL from "@/assets/poster-ipl-t20.jpg";
 import posterCasino from "@/assets/poster-live-casino.jpg";
+import posterToonCasino from "@/assets/poster-cartoon-casino.jpg";
+import posterToonCricket from "@/assets/poster-cartoon-cricket.jpg";
+import posterToonSlots from "@/assets/poster-cartoon-slots.jpg";
+import posterToonArcade from "@/assets/poster-cartoon-arcade.jpg";
 import logoAsset from "@/assets/madras-book-logo.webp.asset.json";
 import { WHATSAPP_URL, WHATSAPP_NUMBER, SITE_NAME, PLATFORMS } from "@/lib/site";
 
