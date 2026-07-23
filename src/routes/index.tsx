@@ -95,7 +95,7 @@ function Home() {
               </a>
               <Link to="/games" className="btn-ghost">Browse platforms</Link>
             </div>
-            <p className="mt-4 text-xs text-muted-foreground">Direct line: {WHATSAPP_NUMBER}</p>
+            <p className="mt-4 text-xs text-muted-foreground">Tap the button — chat opens directly on WhatsApp.</p>
           </div>
           <div className="relative">
             <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/25 to-accent/20 blur-2xl" />
