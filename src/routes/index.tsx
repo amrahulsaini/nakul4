@@ -4,10 +4,10 @@ import posterCricket from "@/assets/poster-cricket-betting.jpg";
 import posterExchange from "@/assets/poster-exchange.jpg";
 import posterIPL from "@/assets/poster-ipl-t20.jpg";
 import posterCasino from "@/assets/poster-live-casino.jpg";
-import posterToonCasino from "@/assets/poster-cartoon-casino.jpg";
-import posterToonCricket from "@/assets/poster-cartoon-cricket.jpg";
-import posterToonSlots from "@/assets/poster-cartoon-slots.jpg";
-import posterToonArcade from "@/assets/poster-cartoon-arcade.jpg";
+import realRoulette from "@/assets/real-roulette.jpg";
+import realPoker from "@/assets/real-poker.jpg";
+import realSlotsHall from "@/assets/real-slots-hall.jpg";
+import realBlackjack from "@/assets/real-blackjack.jpg";
 import logoAsset from "@/assets/madras-book-logo.webp.asset.json";
 import { WHATSAPP_URL, WHATSAPP_NUMBER, SITE_NAME, PLATFORMS } from "@/lib/site";
 
@@ -193,6 +193,84 @@ function Home() {
           <PosterCard img={posterExchange} label="Exchange Betting" title="Back & lay in real time" alt="Aerial cricket stadium with financial trading overlay" />
           <PosterCard img={posterIPL} label="IPL & T20" title="India's biggest cricket season" alt="Cricket batsman silhouette against sunset stadium" />
           <PosterCard img={posterCasino} label="Live Casino" title="500+ live-dealer tables" alt="Roulette wheel with playing cards and casino chips" />
+        </div>
+      </section>
+
+      {/* Live Casino Floor — realistic showcase */}
+      <section className="container-page mt-24">
+        <div className="max-w-2xl">
+          <p className="text-primary text-sm font-semibold uppercase tracking-wider">Inside the casino floor</p>
+          <h2 className="mt-2 text-3xl md:text-4xl">Real tables. Real dealers. Real time.</h2>
+          <p className="mt-4 text-muted-foreground">Every {SITE_NAME} ID unlocks HD live-streamed rooms from the world's biggest studios — Evolution, Ezugi, Pragmatic Play Live and more. Sit at a table in seconds, tip the dealer, and cash out to UPI when you're done.</p>
+        </div>
+
+        <div className="mt-10 grid gap-5 lg:grid-cols-12">
+          {/* Feature: Roulette */}
+          <article className="lg:col-span-7 relative overflow-hidden rounded-3xl border border-border/60 group">
+            <img src={realRoulette} alt="Live European roulette wheel spinning inside a premium casino" width={1024} height={1024} loading="lazy" className="h-80 md:h-[26rem] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+              <span className="inline-block rounded-full bg-primary/20 border border-primary/40 px-3 py-1 text-[11px] uppercase tracking-widest text-primary font-semibold">Live Roulette</span>
+              <h3 className="mt-3 text-2xl md:text-3xl font-semibold">European, Lightning & Auto-Roulette — 40+ tables open 24×7</h3>
+              <p className="mt-2 max-w-2xl text-sm md:text-base text-muted-foreground">Single-zero wheels with RTP up to 97.30%, multipliers up to 500× on Lightning rounds, and side-bet markets you won't find in local rooms. Min stake ₹20, max ₹5,00,000 per spin.</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {["RTP 97.30%", "500× multipliers", "Min ₹20", "24×7 open"].map((t) => (
+                  <span key={t} className="rounded-md bg-white/5 border border-white/10 px-2.5 py-1 text-[11px] text-white/80">{t}</span>
+                ))}
+              </div>
+            </div>
+          </article>
+
+          {/* Feature: Poker */}
+          <article className="lg:col-span-5 relative overflow-hidden rounded-3xl border border-border/60 group">
+            <img src={realPoker} alt="Casino poker table with four aces and stacks of chips" width={1024} height={1024} loading="lazy" className="h-80 md:h-[26rem] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+              <span className="inline-block rounded-full bg-primary/20 border border-primary/40 px-3 py-1 text-[11px] uppercase tracking-widest text-primary font-semibold">Cards & Poker</span>
+              <h3 className="mt-3 text-2xl font-semibold">Teen Patti, Andar Bahar & Casino Hold'em</h3>
+              <p className="mt-2 text-sm text-muted-foreground">India's favourite card games with live Hindi-speaking dealers, side bets on Bonus, AA+, and 6-Card Bonus. Deal every 25 seconds.</p>
+            </div>
+          </article>
+
+          {/* Feature: Slots */}
+          <article className="lg:col-span-5 relative overflow-hidden rounded-3xl border border-border/60 group">
+            <img src={realSlotsHall} alt="Luxury casino floor lined with glowing slot machines" width={1024} height={1024} loading="lazy" className="h-80 md:h-[26rem] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+              <span className="inline-block rounded-full bg-primary/20 border border-primary/40 px-3 py-1 text-[11px] uppercase tracking-widest text-primary font-semibold">Slots & Jackpots</span>
+              <h3 className="mt-3 text-2xl font-semibold">2,000+ slots. Daily drops up to ₹1 crore.</h3>
+              <p className="mt-2 text-sm text-muted-foreground">Pragmatic Play, PG Soft, NetEnt and Hacksaw titles — from Sweet Bonanza to Gates of Olympus. Buy-bonus enabled on eligible slots.</p>
+            </div>
+          </article>
+
+          {/* Feature: Blackjack */}
+          <article className="lg:col-span-7 relative overflow-hidden rounded-3xl border border-border/60 group">
+            <img src={realBlackjack} alt="Live blackjack table with dealer, cards, and colored chips" width={1024} height={1024} loading="lazy" className="h-80 md:h-[26rem] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+              <span className="inline-block rounded-full bg-primary/20 border border-primary/40 px-3 py-1 text-[11px] uppercase tracking-widest text-primary font-semibold">Live Blackjack</span>
+              <h3 className="mt-3 text-2xl md:text-3xl font-semibold">Classic 3:2 Blackjack, Infinite seats, Perfect Pairs</h3>
+              <p className="mt-2 max-w-2xl text-sm md:text-base text-muted-foreground">Play head-to-head or in unlimited-seat rooms. Insurance, split, double-down, and Perfect Pairs / 21+3 side bets all live. House edge as low as 0.42% on classic tables.</p>
+              <div className="mt-4 grid grid-cols-3 gap-3 max-w-md">
+                <div><div className="text-primary font-display text-xl md:text-2xl font-bold">0.42%</div><div className="text-[11px] uppercase tracking-wider text-muted-foreground">House edge</div></div>
+                <div><div className="text-primary font-display text-xl md:text-2xl font-bold">3:2</div><div className="text-[11px] uppercase tracking-wider text-muted-foreground">Blackjack pays</div></div>
+                <div><div className="text-primary font-display text-xl md:text-2xl font-bold">₹50</div><div className="text-[11px] uppercase tracking-wider text-muted-foreground">Min bet</div></div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        {/* Studio strip */}
+        <div className="mt-8 card-surface p-5 md:p-6 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">Powered by leading live-casino studios</p>
+            <div className="mt-2 flex flex-wrap gap-3 text-sm font-semibold">
+              {["Evolution", "Ezugi", "Pragmatic Live", "NetEnt Live", "PG Soft", "Hacksaw"].map((s) => (
+                <span key={s} className="rounded-lg border border-border/60 px-3 py-1">{s}</span>
+              ))}
+            </div>
+          </div>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">Enter the casino floor</a>
         </div>
       </section>
 
