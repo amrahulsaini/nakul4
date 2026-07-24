@@ -384,6 +384,9 @@ function Home() {
         <div className="mt-6">
           <Link to="/faq" className="btn-ghost">See full FAQ →</Link>
         </div>
+      </section>
+
+
 
 
       {/* CTA */}
