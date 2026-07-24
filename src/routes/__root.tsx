@@ -4,7 +4,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import logoAsset from "../assets/madras-book-logo.webp.asset.json";
+import logoAsset from "../assets/madras-book-logo-v2.png.asset.json";
 import { SITE_NAME, WHATSAPP_URL, WHATSAPP_NUMBER } from "../lib/site";
 
 function NotFoundComponent() {
@@ -47,7 +47,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: logoAsset.url, type: "image/webp" },
+      { rel: "icon", href: logoAsset.url, type: "image/png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800;900&display=swap" },
