@@ -53,7 +53,7 @@ export const Route = createFileRoute("/blog/$slug")({
 function BlogPost() {
   const { post } = Route.useLoaderData();
   const related = POSTS.filter((p) => p.slug !== post.slug).slice(0, 3);
-  const headings = post.content.filter((b) => b.h).map((b) => b.h!) as string[];
+  const headings = post.content.filter((b: Post["content"][number]) => b.h).map((b: Post["content"][number]) => b.h!) as string[];
 
   return (
     <article className="container-page py-12 md:py-16 max-w-3xl">
