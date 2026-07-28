@@ -218,9 +218,10 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <SiteHeader />
-      <main><Outlet /></main>
+      <main id="main"><Outlet /></main>
       <SiteFooter />
       <FloatingWA />
     </QueryClientProvider>
   );
 }
+
