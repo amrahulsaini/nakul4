@@ -33,7 +33,7 @@ export const Route = createFileRoute("/")({
       { name: "description", content: `Get your online cricket ID with ${SITE_NAME} on 30+ trusted platforms including FairPlay, Diamond Exchange, Sky Exchange, Lotus 365 & more. Instant activation, 5% joining bonus, 24×7 WhatsApp support.` },
       { name: "keywords", content: "madras book, online cricket id, cricket betting id india, diamond exchange, sky exchange, fairplay id, lotus 365, reddy anna, ipl betting id, online betting id, whatsapp cricket id" },
       { property: "og:title", content: `${SITE_NAME} — India's #1 Online Cricket ID Provider` },
-      { property: "og:description", content: "Instant cricket IDs on 30+ verified platforms. 5% joining bonus, 2% refill bonus, 24×7 WhatsApp support." },
+      { property: "og:description", content: "Madras Book started with a simple frustration: getting a working cricket ID in India took too long, involved too many strangers and left too many questions unan" },
       { property: "og:url", content: "/" },
       { property: "og:image", content: logoAsset.url },
       { name: "twitter:image", content: logoAsset.url },
