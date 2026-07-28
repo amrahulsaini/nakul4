@@ -96,25 +96,69 @@ function NavLink({ to, label }: { to: string; label: string }) {
 }
 
 function SiteHeader() {
+  const [open, setOpen] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  useEffect(() => { setOpen(false); }, [pathname]);
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  }, [open]);
+
+  const links = [
+    { to: "/", label: "Home" },
+    { to: "/games", label: "Platforms" },
+    { to: "/topics", label: "Topics" },
+    { to: "/blog", label: "Blog" },
+    { to: "/about", label: "About" },
+    { to: "/faq", label: "FAQ" },
+    { to: "/contact", label: "Contact" },
+  ];
+
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-lg bg-background/75 border-b border-border/60">
-      <div className="container-page flex items-center justify-between py-3">
-        <Link to="/" className="flex items-center gap-2" aria-label={`${SITE_NAME} — home`}>
-          <img src={logoAsset.url} alt={`${SITE_NAME} logo`} width={140} height={44} className="h-10 w-auto" />
+    <header className="sticky top-0 z-40 backdrop-blur-lg bg-background/80 border-b border-border/60">
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:btn-primary focus:!py-2 focus:!px-3 focus:text-xs">Skip to content</a>
+      <div className="container-page grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 py-3">
+        <Link to="/" className="flex min-w-0 items-center gap-2" aria-label={`${SITE_NAME} — home`}>
+          <img src={logoAsset.url} alt={`${SITE_NAME} logo`} width={140} height={44} className="h-9 sm:h-10 w-auto shrink-0" />
         </Link>
-        <nav className="hidden md:flex items-center gap-7" aria-label="Primary">
-          <NavLink to="/" label="Home" />
-          <NavLink to="/games" label="Platforms" />
-          <NavLink to="/blog" label="Blog" />
-          <NavLink to="/about" label="About" />
-          <NavLink to="/faq" label="FAQ" />
-          <NavLink to="/contact" label="Contact" />
+        <nav className="hidden lg:flex items-center gap-6" aria-label="Primary">
+          {links.map((l) => <NavLink key={l.to} to={l.to} label={l.label} />)}
         </nav>
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary text-sm !py-2 !px-4">Get ID</a>
+        <div className="flex items-center gap-2">
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary text-sm !py-2 !px-4 hidden sm:inline-flex">Get ID</a>
+          <button
+            type="button"
+            className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border/60 bg-secondary/40 hover:bg-secondary transition-colors"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              {open ? <><path d="M6 6l12 12"/><path d="M6 18L18 6"/></> : <><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></>}
+            </svg>
+          </button>
+        </div>
       </div>
+      {open && (
+        <div id="mobile-nav" className="lg:hidden border-t border-border/60 bg-background/95 backdrop-blur">
+          <nav className="container-page py-4 flex flex-col gap-1" aria-label="Mobile">
+            {links.map((l) => (
+              <Link key={l.to} to={l.to} className="rounded-xl px-3 py-3 text-base text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors" activeProps={{ className: "text-foreground bg-secondary" }}>
+                {l.label}
+              </Link>
+            ))}
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary mt-3 w-full">Get your ID on WhatsApp</a>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
+
 
 function SiteFooter() {
   return (
