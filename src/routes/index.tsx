@@ -8,7 +8,7 @@ import realRoulette from "@/assets/real-roulette.jpg";
 import realPoker from "@/assets/real-poker.jpg";
 import realSlotsHall from "@/assets/real-slots-hall.jpg";
 import realBlackjack from "@/assets/real-blackjack.jpg";
-import logoAsset from "@/assets/madras-book-logo-v2.png.asset.json";
+import logoAsset from "@/assets/madras-book-logo.png.asset.json";
 import { WHATSAPP_URL, WHATSAPP_NUMBER, SITE_NAME, PLATFORMS } from "@/lib/site";
 import { TOPICS } from "@/lib/keywords";
 
