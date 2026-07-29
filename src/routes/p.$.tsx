@@ -91,7 +91,7 @@ function PageView() {
           <div className="card-surface p-6 md:p-8">
             <h2 className="text-2xl">Why players choose Madras Book for {page.h1.split(" — ")[0]}</h2>
             <ul className="mt-4 space-y-3">
-              {page.bullets.map((b) => (
+              {page.bullets.map((b: string) => (
                 <li key={b} className="flex gap-3 text-sm text-muted-foreground">
                   <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
                   <span>{b}</span>

@@ -19,6 +19,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TopicsSlugRouteImport } from './routes/topics.$slug'
 import { Route as PlatformsSlugRouteImport } from './routes/platforms.$slug'
+import { Route as PSplatRouteImport } from './routes/p.$'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const TopicsRoute = TopicsRouteImport.update({
@@ -71,6 +72,11 @@ const PlatformsSlugRoute = PlatformsSlugRouteImport.update({
   path: '/platforms/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PSplatRoute = PSplatRouteImport.update({
+  id: '/p/$',
+  path: '/p/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/topics': typeof TopicsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/p/$': typeof PSplatRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
   '/topics/$slug': typeof TopicsSlugRoute
 }
@@ -100,6 +107,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/topics': typeof TopicsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/p/$': typeof PSplatRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
   '/topics/$slug': typeof TopicsSlugRoute
 }
@@ -114,6 +122,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/topics': typeof TopicsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/p/$': typeof PSplatRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
   '/topics/$slug': typeof TopicsSlugRoute
 }
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/topics'
     | '/blog/$slug'
+    | '/p/$'
     | '/platforms/$slug'
     | '/topics/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/topics'
     | '/blog/$slug'
+    | '/p/$'
     | '/platforms/$slug'
     | '/topics/$slug'
   id:
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/topics'
     | '/blog/$slug'
+    | '/p/$'
     | '/platforms/$slug'
     | '/topics/$slug'
   fileRoutesById: FileRoutesById
@@ -168,6 +180,7 @@ export interface RootRouteChildren {
   GamesRoute: typeof GamesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TopicsRoute: typeof TopicsRouteWithChildren
+  PSplatRoute: typeof PSplatRoute
   PlatformsSlugRoute: typeof PlatformsSlugRoute
 }
 
@@ -243,6 +256,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlatformsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/p/$': {
+      id: '/p/$'
+      path: '/p/$'
+      fullPath: '/p/$'
+      preLoaderRoute: typeof PSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
@@ -283,6 +303,7 @@ const rootRouteChildren: RootRouteChildren = {
   GamesRoute: GamesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TopicsRoute: TopicsRouteWithChildren,
+  PSplatRoute: PSplatRoute,
   PlatformsSlugRoute: PlatformsSlugRoute,
 }
 export const routeTree = rootRouteImport
