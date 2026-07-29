@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { POSTS } from "./blog";
-import { PLATFORMS } from "@/lib/site";
+import { PLATFORMS, SITE_URL } from "@/lib/site";
 import { TOPICS } from "@/lib/keywords";
 import { IMPORTED_PAGES } from "@/lib/imported-pages";
 
-const BASE_URL = "https://madrasbook.lovable.app";
+const BASE_URL = SITE_URL;
 
 interface SitemapEntry { path: string; changefreq?: string; priority?: string; }
 
