@@ -130,7 +130,7 @@ function SiteHeader() {
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:btn-primary focus:!py-2 focus:!px-3 focus:text-xs">Skip to content</a>
       <div className="container-page grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 py-3">
         <Link to="/" className="flex min-w-0 items-center gap-2" aria-label={`${SITE_NAME} — home`}>
-          <img src={logoAsset.url} alt={`${SITE_NAME} logo`} width={140} height={44} className="h-9 sm:h-10 w-auto shrink-0" />
+          <img src={logoAsset.url} alt={`${SITE_NAME} logo`} width={220} height={70} className="h-12 sm:h-14 md:h-16 w-auto shrink-0 drop-shadow-[0_2px_8px_rgba(212,175,55,0.35)]" />
         </Link>
         <nav className="hidden lg:flex items-center gap-6" aria-label="Primary">
           {links.map((l) => <NavLink key={l.to} to={l.to} label={l.label} />)}
@@ -173,7 +173,7 @@ function SiteFooter() {
     <footer className="border-t border-border/60 mt-24">
       <div className="container-page py-12 grid gap-8 md:grid-cols-4">
         <div className="md:col-span-2">
-          <img src={logoAsset.url} alt={`${SITE_NAME} logo`} width={160} height={50} className="h-11 w-auto" />
+          <img src={logoAsset.url} alt={`${SITE_NAME} logo`} width={240} height={76} className="h-14 md:h-16 w-auto" />
           <p className="mt-4 text-sm text-muted-foreground max-w-sm">
             {SITE_NAME} is India's trusted online cricket ID and betting book provider. Instant IDs on 30+ verified platforms, 24×7 WhatsApp support, and secure UPI deposits & withdrawals.
           </p>

@@ -3,8 +3,9 @@ import type {} from "@tanstack/react-start";
 import { POSTS } from "./blog";
 import { PLATFORMS } from "@/lib/site";
 import { TOPICS } from "@/lib/keywords";
+import { IMPORTED_PAGES } from "@/lib/imported-pages";
 
-const BASE_URL = "";
+const BASE_URL = "https://madrasbook.lovable.app";
 
 interface SitemapEntry { path: string; changefreq?: string; priority?: string; }
 
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           ...PLATFORMS.map((p) => ({ path: `/platforms/${p.slug}`, changefreq: "monthly", priority: "0.8" })),
           ...TOPICS.map((t) => ({ path: `/topics/${t.slug}`, changefreq: "monthly", priority: "0.8" })),
           ...POSTS.map((p) => ({ path: `/blog/${p.slug}`, changefreq: "monthly", priority: "0.8" })),
+          ...IMPORTED_PAGES.map((p) => ({ path: `/p/${p.slug}`, changefreq: "monthly", priority: "0.7" })),
         ];
         const urls = entries.map((e) =>
           [
