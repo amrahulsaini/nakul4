@@ -146,3 +146,23 @@
   & strong { color: var(--foreground); font-weight: 600; }
 }
 
+/* Hide Lovable "Made with" badge on published previews */
+.lovable-badge,
+[data-lovable-badge],
+[data-testid="lovable-badge"],
+.made-with-lovable,
+[class*="lovable-badge"],
+[class*="made-with-lovable"],
+[id*="lovable-badge"],
+[id*="made-with-lovable"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  z-index: -9999 !important;
+}
+
+
