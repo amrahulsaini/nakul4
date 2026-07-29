@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { PLATFORMS, WHATSAPP_URL, WHATSAPP_NUMBER, SITE_NAME, type Platform } from "@/lib/site";
+import { PLATFORMS, WHATSAPP_URL, SITE_NAME, type Platform } from "@/lib/site";
+import { webPageSchema, breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import posterCricket from "@/assets/poster-cricket-betting.jpg";
 import posterExchange from "@/assets/poster-exchange.jpg";
 import posterIPL from "@/assets/poster-ipl-t20.jpg";
@@ -35,17 +36,29 @@ export const Route = createFileRoute("/platforms/$slug")({
         { property: "og:url", content: `/platforms/${p.slug}` },
       ],
       links: [{ rel: "canonical", href: `/platforms/${p.slug}` }],
-      scripts: [{
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Product",
-          name: p.name,
-          description: p.blurb,
-          brand: { "@type": "Brand", name: SITE_NAME },
-          category: p.tag,
-        }),
-      }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: p.name,
+            description: p.blurb,
+            brand: { "@type": "Brand", name: SITE_NAME },
+            category: p.tag,
+          }),
+        },
+        { type: "application/ld+json", children: JSON.stringify(webPageSchema({ path: `/platforms/${p.slug}`, title: `${p.name} — Get Your ID Instantly on WhatsApp | ${SITE_NAME}`, description: p.blurb })) },
+        { type: "application/ld+json", children: JSON.stringify(serviceSchema({ name: p.name, description: p.blurb, path: `/platforms/${p.slug}` })) },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Platforms", path: "/games" },
+            { name: p.name, path: `/platforms/${p.slug}` },
+          ])),
+        },
+      ],
     };
   },
   component: PlatformDetail,
