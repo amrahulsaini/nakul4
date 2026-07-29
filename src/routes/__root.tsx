@@ -5,7 +5,7 @@ import { useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import logoAsset from "../assets/madras-book-logo-v2.png.asset.json";
+import logoAsset from "../assets/madras-book-logo.png.asset.json";
 import { SITE_NAME, WHATSAPP_URL, WHATSAPP_NUMBER } from "../lib/site";
 
 function NotFoundComponent() {
