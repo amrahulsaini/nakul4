@@ -1,4 +1,4 @@
-export const WHATSAPP_URL = "https://wa.me/916377523847";
+export const WHATSAPP_URL = "https://wa.me/916377523847?text=Hello%20madras%20exch%2C%20I%20want%20betting%20id";
 export const WHATSAPP_NUMBER = "+91 63775 23847";
 export const SITE_NAME = "Madras Book";
 export const SITE_TAGLINE = "India's #1 Online Cricket ID & Betting Book";
