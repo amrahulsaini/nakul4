@@ -8,9 +8,19 @@ import realRoulette from "@/assets/real-roulette.jpg";
 import realPoker from "@/assets/real-poker.jpg";
 import realSlotsHall from "@/assets/real-slots-hall.jpg";
 import realBlackjack from "@/assets/real-blackjack.jpg";
-import logoAsset from "@/assets/madras-book-logo.png.asset.json";
-import { WHATSAPP_URL, WHATSAPP_NUMBER, SITE_NAME, PLATFORMS } from "@/lib/site";
+import { WHATSAPP_URL, SITE_NAME, PLATFORMS, LOGO_URL } from "@/lib/site";
 import { TOPICS } from "@/lib/keywords";
+import { webPageSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
+
+const HOME_FAQS = [
+  { q: "How fast do I actually get my cricket ID?", a: `Most ${SITE_NAME} players are set up in under two minutes on WhatsApp — from first message to first login.` },
+  { q: "Which platforms can I open an ID on?", a: "12+ verified platforms including 1xBet, FairPlay, Diamond Exchange, Sky Exchange, Lotus 365, Reddy Anna, Mahadev Book and more." },
+  { q: "What is the minimum deposit?", a: "Most cricket IDs start at ₹500. Premium exchange IDs open from ₹1,000." },
+  { q: "Do you support all payment methods?", a: "Yes — Paytm, GPay, PhonePe, UPI, IMPS, NEFT, bank transfer and crypto. Pick whatever suits you." },
+  { q: "How fast are withdrawals?", a: "Standard payouts complete within 15–30 minutes to your registered UPI or bank account." },
+  { q: "Do I get a bonus on my first deposit?", a: "Yes — every new player gets a 5% joining bonus and a 2% refill bonus on every subsequent top-up." },
+  { q: "Is support really 24×7?", a: "Yes. Real humans, not bots — replies within seconds any hour of the day." },
+];
 
 function PosterCard({ img, label, title, alt }: { img: string; label: string; title: string; alt: string }) {
   return (
@@ -35,21 +45,21 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: `${SITE_NAME} — India's #1 Online Cricket ID Provider` },
       { property: "og:description", content: "Madras Book started with a simple frustration: getting a working cricket ID in India took too long, involved too many strangers and left too many questions unan" },
       { property: "og:url", content: "/" },
-      { property: "og:image", content: logoAsset.url },
-      { name: "twitter:image", content: logoAsset.url },
+      { property: "og:image", content: LOGO_URL },
+      { name: "twitter:image", content: LOGO_URL },
     ],
     links: [{ rel: "canonical", href: "/" }],
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: SITE_NAME,
-          url: "/",
-          potentialAction: { "@type": "SearchAction", target: "/?q={q}", "query-input": "required name=q" },
-        }),
+        children: JSON.stringify(webPageSchema({
+          path: "/",
+          title: `${SITE_NAME} — Online Cricket ID in 2 Minutes | WhatsApp 24×7`,
+          description: `Get your online cricket ID with ${SITE_NAME} on 30+ trusted platforms. Instant activation, 5% joining bonus, 24×7 WhatsApp support.`,
+        })),
       },
+      { type: "application/ld+json", children: JSON.stringify(breadcrumbSchema([{ name: "Home", path: "/" }])) },
+      { type: "application/ld+json", children: JSON.stringify(faqSchema(HOME_FAQS)) },
     ],
   }),
   component: Home,
@@ -358,20 +368,12 @@ function Home() {
 
       {/* Homepage FAQ */}
       <section className="container-page mt-24">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl mx-auto text-center">
           <p className="text-primary text-sm font-semibold uppercase tracking-wider">Frequently asked</p>
-          <h2 className="mt-2 text-3xl md:text-4xl">Everything about your cricket ID.</h2>
+          <h2 className="mt-2 text-3xl md:text-4xl text-balance">Everything about your cricket ID.</h2>
         </div>
-        <div className="mt-10 max-w-3xl divide-y divide-border/60 border border-border/60 rounded-2xl overflow-hidden">
-          {[
-            { q: "How fast do I actually get my cricket ID?", a: `Most ${SITE_NAME} players are set up in under two minutes on WhatsApp — from first message to first login.` },
-            { q: "Which platforms can I open an ID on?", a: "12+ verified platforms including 1xBet, FairPlay, Diamond Exchange, Sky Exchange, Lotus 365, Reddy Anna, Mahadev Book and more." },
-            { q: "What is the minimum deposit?", a: "Most cricket IDs start at ₹500. Premium exchange IDs open from ₹1,000." },
-            { q: "Do you support all payment methods?", a: "Yes — Paytm, GPay, PhonePe, UPI, IMPS, NEFT, bank transfer and crypto. Pick whatever suits you." },
-            { q: "How fast are withdrawals?", a: "Standard payouts complete within 15–30 minutes to your registered UPI or bank account." },
-            { q: "Do I get a bonus on my first deposit?", a: "Yes — every new player gets a 5% joining bonus and a 2% refill bonus on every subsequent top-up." },
-            { q: "Is support really 24×7?", a: "Yes. Real humans, not bots — replies within seconds any hour of the day." },
-          ].map((f) => (
+        <div className="mt-10 max-w-3xl mx-auto divide-y divide-border/60 border border-border/60 rounded-2xl overflow-hidden">
+          {HOME_FAQS.map((f) => (
             <details key={f.q} className="group open:bg-secondary/40">
               <summary className="cursor-pointer list-none p-5 flex items-start justify-between gap-4">
                 <span className="font-medium">{f.q}</span>
@@ -381,7 +383,7 @@ function Home() {
             </details>
           ))}
         </div>
-        <div className="mt-6">
+        <div className="mt-6 text-center">
           <Link to="/faq" className="btn-ghost">See full FAQ →</Link>
         </div>
       </section>
@@ -396,10 +398,10 @@ function Home() {
           <div className="relative grid gap-6 md:grid-cols-[1.4fr_1fr] items-center">
             <div>
               <h2 className="text-2xl md:text-3xl">Ready to play the next match?</h2>
-              <p className="mt-3 text-muted-foreground max-w-xl">Your ID can be live before the coin toss. Message {SITE_NAME} on WhatsApp — {WHATSAPP_NUMBER.replace(/./g, "•")}.</p>
+              <p className="mt-3 text-muted-foreground max-w-xl">Your ID can be live before the coin toss. Tap the button and contact {SITE_NAME} on WhatsApp.</p>
             </div>
             <div className="flex md:justify-end">
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">Start on WhatsApp</a>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">Contact on WhatsApp</a>
             </div>
           </div>
         </div>

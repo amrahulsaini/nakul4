@@ -5,8 +5,8 @@ import { useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import logoAsset from "../assets/madras-book-logo.png.asset.json";
-import { SITE_NAME, WHATSAPP_URL, WHATSAPP_NUMBER } from "../lib/site";
+import { SITE_NAME, WHATSAPP_URL, LOGO_PATH, LOGO_URL } from "../lib/site";
+import { organizationSchema, webSiteSchema } from "../lib/schema";
 
 function NotFoundComponent() {
   return (
@@ -51,29 +51,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Madras Book started with a simple frustration: getting a working cricket ID in India took too long, involved too many strangers and left too many questions unan" },
       { property: "og:description", content: "Madras Book started with a simple frustration: getting a working cricket ID in India took too long, involved too many strangers and left too many questions unan" },
       { name: "twitter:description", content: "Madras Book started with a simple frustration: getting a working cricket ID in India took too long, involved too many strangers and left too many questions unan" },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/4f41272c-d72f-4523-8038-8bd7c22f2d3a" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/4f41272c-d72f-4523-8038-8bd7c22f2d3a" },
+      { property: "og:image", content: LOGO_URL },
+      { name: "twitter:image", content: LOGO_URL },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: logoAsset.url, type: "image/png" },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/favicon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800;900&display=swap" },
     ],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: SITE_NAME,
-          url: "/",
-          logo: logoAsset.url,
-          sameAs: [],
-          contactPoint: { "@type": "ContactPoint", telephone: "+916377523847", contactType: "customer service", areaServed: "IN", availableLanguage: ["en", "hi"] },
-        }),
-      },
+      { type: "application/ld+json", children: JSON.stringify(organizationSchema()) },
+      { type: "application/ld+json", children: JSON.stringify(webSiteSchema()) },
     ],
   }),
   shellComponent: RootShell,
@@ -128,14 +120,14 @@ function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 backdrop-blur-lg bg-background/80 border-b border-border/60">
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:btn-primary focus:!py-2 focus:!px-3 focus:text-xs">Skip to content</a>
-      <div className="container-page grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 py-3">
+      <div className="container-page grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 py-3">
         <Link to="/" className="flex min-w-0 items-center gap-2" aria-label={`${SITE_NAME} — home`}>
-          <img src={logoAsset.url} alt={`${SITE_NAME} logo`} width={220} height={70} className="h-12 sm:h-14 md:h-16 w-auto shrink-0 drop-shadow-[0_2px_8px_rgba(212,175,55,0.35)]" />
+          <img src={LOGO_PATH} alt={`${SITE_NAME} logo`} width={349} height={85} className="h-12 sm:h-14 md:h-16 w-auto shrink-0 drop-shadow-[0_2px_8px_rgba(212,175,55,0.35)]" />
         </Link>
-        <nav className="hidden lg:flex items-center gap-6" aria-label="Primary">
+        <nav className="hidden lg:flex items-center justify-center gap-6" aria-label="Primary">
           {links.map((l) => <NavLink key={l.to} to={l.to} label={l.label} />)}
         </nav>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-end gap-2">
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary text-sm !py-2 !px-4 hidden sm:inline-flex">Get ID</a>
           <button
             type="button"
@@ -168,16 +160,32 @@ function SiteHeader() {
 }
 
 
+function WhatsAppIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.4.2-.7.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.2-.5 0-.2 0-.4-.1-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.2 3.3 5.2 4.6 3 1.3 3 .9 3.6.8.5-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4 0-.2-.3-.3-.6-.5zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3c1.4.8 3.1 1.3 4.8 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/>
+    </svg>
+  );
+}
+
 function SiteFooter() {
   return (
     <footer className="border-t border-border/60 mt-24">
       <div className="container-page py-12 grid gap-8 md:grid-cols-4">
         <div className="md:col-span-2">
-          <img src={logoAsset.url} alt={`${SITE_NAME} logo`} width={240} height={76} className="h-14 md:h-16 w-auto" />
+          <img src={LOGO_PATH} alt={`${SITE_NAME} logo`} width={349} height={85} className="h-14 md:h-16 w-auto" />
           <p className="mt-4 text-sm text-muted-foreground max-w-sm">
             {SITE_NAME} is India's trusted online cricket ID and betting book provider. Instant IDs on 30+ verified platforms, 24×7 WhatsApp support, and secure UPI deposits & withdrawals.
           </p>
-          <p className="mt-3 text-xs text-muted-foreground">WhatsApp: <a className="hover:text-foreground" href={WHATSAPP_URL}>{WHATSAPP_NUMBER}</a></p>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-2 rounded-xl border border-[oklch(0.65_0.17_150)]/50 bg-[oklch(0.65_0.17_150)]/10 px-4 py-2.5 text-sm font-semibold text-[oklch(0.75_0.15_150)] hover:bg-[oklch(0.65_0.17_150)]/20 transition-colors"
+          >
+            <WhatsAppIcon />
+            Contact on WhatsApp
+          </a>
         </div>
         <div>
           <h4 className="text-sm font-semibold mb-3">Explore</h4>
@@ -214,9 +222,7 @@ function FloatingWA() {
       aria-label="Chat on WhatsApp"
       className="fixed bottom-5 right-5 z-50 grid place-items-center h-14 w-14 rounded-full bg-[oklch(0.65_0.17_150)] text-white shadow-[0_10px_30px_-6px_oklch(0.60_0.20_150_/_0.55)] hover:scale-105 transition-transform"
     >
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.4.2-.7.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.2-.5 0-.2 0-.4-.1-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.2 3.3 5.2 4.6 3 1.3 3 .9 3.6.8.5-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4 0-.2-.3-.3-.6-.5zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3c1.4.8 3.1 1.3 4.8 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/>
-      </svg>
+      <WhatsAppIcon size={26} />
     </a>
   );
 }

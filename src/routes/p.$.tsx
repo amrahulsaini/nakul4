@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { SITE_NAME, WHATSAPP_URL, WHATSAPP_NUMBER } from "@/lib/site";
+import { WHATSAPP_URL } from "@/lib/site";
 import { IMPORTED_BY_SLUG, IMPORTED_PAGES, type ImportedPage } from "@/lib/imported-pages";
+import { articleSchema, breadcrumbSchema, serviceSchema, webPageSchema } from "@/lib/schema";
 
 export const Route = createFileRoute("/p/$")({
   loader: ({ params }) => {
@@ -26,28 +27,16 @@ export const Route = createFileRoute("/p/$")({
       ],
       links: [{ rel: "canonical", href: `/p/${slug}` }],
       scripts: [
+        { type: "application/ld+json", children: JSON.stringify(webPageSchema({ path: `/p/${slug}`, title: page.title, description: page.description })) },
+        { type: "application/ld+json", children: JSON.stringify(articleSchema({ headline: page.h1, description: page.description, path: `/p/${slug}` })) },
+        { type: "application/ld+json", children: JSON.stringify(serviceSchema({ name: page.h1, description: page.description, path: `/p/${slug}` })) },
         {
           type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Article",
-            headline: page.h1,
-            description: page.description,
-            author: { "@type": "Organization", name: SITE_NAME },
-            publisher: { "@type": "Organization", name: SITE_NAME },
-          }),
-        },
-        {
-          type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-              { "@type": "ListItem", position: 2, name: "Platforms", item: "/p" },
-              { "@type": "ListItem", position: 3, name: page.h1, item: `/p/${slug}` },
-            ],
-          }),
+          children: JSON.stringify(breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: page.category, path: "/games" },
+            { name: page.h1, path: `/p/${slug}` },
+          ])),
         },
       ],
     };
@@ -112,7 +101,7 @@ function PageView() {
           <div className="card-surface p-6 md:p-8">
             <h2 className="text-2xl">Deposits, withdrawals & safety</h2>
             <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-              Every {page.category.toLowerCase()} account opened through Madras Book supports UPI (GPay, PhonePe, Paytm), IMPS, NEFT and direct bank transfer. Withdrawals typically settle within 10–30 minutes to any Indian bank account. Your KYC stays private, your ID stays yours, and our team is available 24×7 on WhatsApp at {WHATSAPP_NUMBER} for any deposit, withdrawal or gameplay support.
+              Every {page.category.toLowerCase()} account opened through Madras Book supports UPI (GPay, PhonePe, Paytm), IMPS, NEFT and direct bank transfer. Withdrawals typically settle within 10–30 minutes to any Indian bank account. Your KYC stays private, your ID stays yours, and our team is available 24×7 — just <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">contact us on WhatsApp</a> for any deposit, withdrawal or gameplay support.
             </p>
           </div>
         </article>

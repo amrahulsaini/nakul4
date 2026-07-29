@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SITE_NAME, WHATSAPP_URL } from "@/lib/site";
 import { TOPIC_BY_SLUG, TOPICS, type KeywordTopic } from "@/lib/keywords";
+import { webPageSchema, breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
 
 export const Route = createFileRoute("/topics/$slug")({
   loader: ({ params }) => {
